@@ -3,6 +3,7 @@ import { inject, injectable } from "inversify";
 import { RequestData } from "mediatr-ts";
 import { Message, OmitPartialGroupDMChannel } from "discord.js";
 import { TemplateTransformer } from "../Template/TemplateTransformer";
+import { TemplateResolver } from "../Template/TemplateResolver";
 
 class PingEventCommandRequest extends RequestData<void> {
     message: OmitPartialGroupDMChannel<Message<boolean>>;
@@ -18,12 +19,9 @@ class PingEventCommandRequest extends RequestData<void> {
 class PingEventCommand implements RequestHandler<PingEventCommandRequest, void> {
 
     constructor(
-        @inject(TemplateTransformer)
-        private readonly templateTransformer: TemplateTransformer,
-    ) {
-
-        console.log(templateTransformer);
-    }
+        @inject(TemplateResolver)
+        private readonly templateResolver: TemplateResolver,
+    ) { }
 
     async handle(request: PingEventCommandRequest): Promise<void> {
         if (request.message.author.bot) {
@@ -31,19 +29,15 @@ class PingEventCommand implements RequestHandler<PingEventCommandRequest, void> 
         }
 
         if (request.message.content === "!ping") {
-            const usuario = request.message.author.username;
-            const fecha = new Date().toLocaleDateString();
+            const userName = request.message.author.username;
+            const currentDate = new Date().toLocaleDateString();
 
-            const template = `
-            ¡Hola, **{{ usuario }}**! 👋 
-             Hoy es *{{ fecha }}*.`;
-
-            const mensajeFormateado = this.templateTransformer.transform<{ usuario: string; fecha: string }>(
-                template,
-                { usuario, fecha }
+            const message = this.templateResolver.getContent(
+                1,
+                { userName, currentDate }
             );
 
-            request.message.reply(mensajeFormateado);
+            request.message.reply(message);
         }
     }
 }

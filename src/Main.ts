@@ -6,13 +6,14 @@ import { Mediator } from "mediatr-ts";
 import { ReadyEventCommandRequest } from "./Event/ReadyEventCommand";
 import { PingEventCommandRequest } from "./Event/PingEventCommand";
 import { container } from "./Configuration/Container";
+import { ITemplateRepository } from "./Template/repositories/ITemplateRepository ";
+import { TemplateRepository } from "./Template/repositories/InMemory/TemplateRepository";
 
 dotenv.config();
 
 container.applyMiddleware(LoggerMiddleware);
 const discordClient = container.resolve(DiscordClient);
 const mediator = container.resolve(Mediator);
-
 
 discordClient.once("ready", async () => {
     await mediator.send(new ReadyEventCommandRequest());

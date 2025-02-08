@@ -1,0 +1,5 @@
+class SearchInfo {
+
+}
+
+export { SearchInfo }

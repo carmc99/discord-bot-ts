@@ -1,0 +1,5 @@
+class GetUserModel {
+
+}
+
+export { GetUserModel }

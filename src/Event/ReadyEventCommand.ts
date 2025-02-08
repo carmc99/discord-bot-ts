@@ -8,7 +8,7 @@ class ReadyEventCommandRequest extends RequestData<void> {}
 @injectable()
 class ReadyEventCommand implements RequestHandler<ReadyEventCommandRequest, void> {
     async handle(): Promise<void> {
-        console.log("Bot está listo 🚀");
+        console.log("Bot listo 🚀");
     }
 }
 

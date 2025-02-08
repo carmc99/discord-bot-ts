@@ -6,8 +6,6 @@ import { Mediator } from "mediatr-ts";
 import { ReadyEventCommandRequest } from "./Event/ReadyEventCommand";
 import { PingEventCommandRequest } from "./Event/PingEventCommand";
 import { container } from "./Configuration/Container";
-import { ITemplateRepository } from "./Template/repositories/ITemplateRepository ";
-import { TemplateRepository } from "./Template/repositories/InMemory/TemplateRepository";
 
 dotenv.config();
 

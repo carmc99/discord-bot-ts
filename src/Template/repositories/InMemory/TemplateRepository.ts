@@ -11,6 +11,15 @@ class TemplateRepository implements ITemplateRepository {
         this.addTemplate(
             `¡Hola, **{{ userName }}**! 👋\nHoy es *{{ currentDate }}*.`
         );
+
+        this.addTemplate(
+            `🎉 **¡Bienvenido, {{ userName }}!** 🎉\n` +
+            `¡Gracias por unirte a nuestro servidor de Discord! 🚀\n\n` +
+            `📅 **Fecha de ingreso:** {{ joinDate }}\n` +
+            `⏰ **Hora actual:** {{ currentTime }}\n\n` +
+            `🔗 **Invitación al servidor:** [Haz clic aquí]({{ inviteLink }})\n\n` +
+            `¡No olvides revisar las reglas del servidor y presentarte en el canal de #bienvenida! 😊`
+        );
     }
 
     addTemplate(content: string): number {

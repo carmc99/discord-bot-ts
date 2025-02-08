@@ -2,7 +2,6 @@ import { RequestHandler, requestHandler } from "mediatr-ts";
 import { inject, injectable } from "inversify";
 import { RequestData } from "mediatr-ts";
 import { Message, OmitPartialGroupDMChannel } from "discord.js";
-import { TemplateTransformer } from "../Template/TemplateTransformer";
 import { TemplateResolver } from "../Template/TemplateResolver";
 
 class PingEventCommandRequest extends RequestData<void> {
@@ -32,10 +31,22 @@ class PingEventCommand implements RequestHandler<PingEventCommandRequest, void> 
             const userName = request.message.author.username;
             const currentDate = new Date().toLocaleDateString();
 
+            const values = {
+                userName: userName,
+                joinDate: "2023-10-01",
+                currentTime: currentDate,
+                inviteLink: "https://discord.gg/invite-link",
+            };
+
             const message = this.templateResolver.getContent(
-                1,
-                { userName, currentDate }
+                2,
+                values
             );
+
+            // const message = this.templateResolver.getContent(
+            //     1,
+            //     { userName, currentDate }
+            // );
 
             request.message.reply(message);
         }

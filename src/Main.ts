@@ -7,18 +7,14 @@ import { DiscordClient } from "./Client/DiscordClient";
 import { Mediator } from "mediatr-ts";
 import { ReadyEventCommandRequest } from "./Event/ReadyEventCommand";
 import { PingEventCommandRequest } from "./Event/PingEventCommand";
+import { container } from "./Container";
 
 dotenv.config();
 
-const container: Container = new Container({
-    autoBindInjectable: true,
-    defaultScope: BindingScopeEnum.Request
-});
-
 container.applyMiddleware(LoggerMiddleware);
-
 const discordClient = container.resolve(DiscordClient);
 const mediator = container.resolve(Mediator);
+
 
 discordClient.once("ready", async () => {
     await mediator.send(new ReadyEventCommandRequest());

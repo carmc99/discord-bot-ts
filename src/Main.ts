@@ -1,13 +1,11 @@
 import "reflect-metadata";
 import dotenv from "dotenv";
-import { BindingScopeEnum, Container } from "inversify";
-import { GetUserQuery, GetUserQueryRequest } from "./User/GetUserQuery";
-import { LoggerMiddleware } from "./LoggerMiddleware";
+import { LoggerMiddleware } from "./Logger/LoggerMiddleware";
 import { DiscordClient } from "./Client/DiscordClient";
 import { Mediator } from "mediatr-ts";
 import { ReadyEventCommandRequest } from "./Event/ReadyEventCommand";
 import { PingEventCommandRequest } from "./Event/PingEventCommand";
-import { container } from "./Container";
+import { container } from "./Configuration/Container";
 
 dotenv.config();
 

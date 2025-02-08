@@ -1,5 +1,0 @@
-class SearchInfo {
-
-}
-
-export { SearchInfo }
